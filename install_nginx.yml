@@ -1,0 +1,44 @@
+- name: Configure Nginx Web Server on Azure VM
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start and enable nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy custom index page
+      copy:
+        dest: /var/www/html/index.nginx-debian.html
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <title>Shorya Ansible Project</title>
+          </head>
+          <body>
+            <h1>Shorya's Ansible Project 🚀</h1>
+            <p>Nginx configured automatically using Ansible on an Azure Linux VM.</p>
+            <p>Provisioned with Terraform. Configured with Ansible.</p>
+          </body>
+          </html>
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
