@@ -81,7 +81,7 @@ ansible-lab/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ruhelashorya-repo/ansible-nginx-automation.git
+git clone https://github.com/shoryaruhela/ansible-nginx-automation.git
 cd ansible-nginx-automation
 ```
 
